@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-constructor */
 import React from 'react';
-// import './App.css';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
