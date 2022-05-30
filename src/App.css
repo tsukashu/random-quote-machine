@@ -1,0 +1,23 @@
+body {
+  color: whitesmoke;
+  background: #333;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#quote-box {
+  display: flex;
+  flex-direction: column;
+  background: blue;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 480px;
+}
