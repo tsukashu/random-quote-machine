@@ -1,65 +1,104 @@
 /* eslint-disable no-useless-constructor */
-import React from 'react';
+// TODO テスト用のjsonをとりま直書きでいいので用意する。
+import React, { Component } from 'react';
 import './App.css';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
       <div className='' id='quote-box'>
-        quote-box
-        <Author />
+        <Text quotes={Quotes.quotes} />
+        <Author quotes={Quotes.quotes} />
         <NewQuote />
-        <TweetQuote />
+        <TweetQuote quotes={Quotes.quotes} />
       </div>
     );
   }
 }
 
-class Author extends React.Component {
+class Text extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div className='' id='text'>
+        {this.props.quotes[0].quote}
+      </div>
+    );
+  }
+}
+
+class Author extends Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
       <div className='' id='author'>
-        author
+        {this.props.quotes[0].author}
       </div>
     );
   }
 }
 
-class NewQuote extends React.Component {
+class NewQuote extends Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <div className='' id='new-quote'>
+      <button className='' id='new-quote'>
         new-quote
-      </div>
+      </button>
     );
   }
 }
 
-class TweetQuote extends React.Component {
+class TweetQuote extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
+    const twitterUrl = 'http://twitter.com/intent/tweet';
+    const hashtags = ['quote', 'freeCodeCamp'];
+    const text = this.props.quotes[0].quote;
+
     return (
-      <a
-        href='http://twitter.com/intent/tweet'
-        target='_blank'
-        rel='noopener noreferrer'
-        id='tweet-quote'
-      >
-        tweet
-      </a>
+      <p>
+        <a
+          href={`${twitterUrl}?text=${text}&hashtags=${hashtags}`}
+          target='_blank'
+          rel='noopener noreferrer'
+          id='tweet-quote'
+        >
+          tweet
+        </a>
+      </p>
     );
   }
 }
 
+const Quotes = {
+  quotes: [
+    {
+      quote:
+        'Life isn’t about getting and having, it’s about giving and being.',
+      author: 'Kevin Kruse',
+    },
+    {
+      quote:
+        'Whatever the mind of man can conceive and believe, it can achieve.',
+      author: 'Napoleon Hill',
+    },
+    {
+      quote: 'Strive not to be a success, but rather to be of value.',
+      author: 'Albert Einstein',
+    },
+  ],
+};
 export default App;
