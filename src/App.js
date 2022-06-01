@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-constructor */
 // TODO テスト用のjsonをとりま直書きでいいので用意する。
+// TODO
 import React, { Component } from 'react';
 import './App.css';
 
