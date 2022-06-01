@@ -1,20 +1,42 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 /* eslint-disable no-useless-constructor */
 // TODO テスト用のjsonをとりま直書きでいいので用意する。
-// TODO
+
 import React, { Component } from 'react';
+import { Icon } from '@iconify/react';
 import './App.css';
+import Quotes from './quotes.json';
+import { render } from '@testing-library/react';
+const quotes = Quotes.quotes;
+
+function SetRandomeQuotes(key) {
+  console.log('test');
+  let index = Math.floor(Math.random() * quotes.length);
+  return quotes[index][key];
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      quote: '',
+      author: '',
+    };
   }
+
+  componentDidMount() {
+    this.setState({ quote: SetRandomeQuotes('quote') });
+    this.setState({ author: SetRandomeQuotes('author') });
+  }
+
   render() {
     return (
       <div className='' id='quote-box'>
-        <Text quotes={Quotes.quotes} />
-        <Author quotes={Quotes.quotes} />
+        <Text quote={this.state.quote} />
+        <Author author={this.state.author} />
         <NewQuote />
-        <TweetQuote quotes={Quotes.quotes} />
+        <TweetQuote quotes={quotes} />
       </div>
     );
   }
@@ -27,7 +49,7 @@ class Text extends Component {
   render() {
     return (
       <div className='' id='text'>
-        {this.props.quotes[0].quote}
+        {this.props.quote}
       </div>
     );
   }
@@ -40,7 +62,7 @@ class Author extends Component {
   render() {
     return (
       <div className='' id='author'>
-        {this.props.quotes[0].author}
+        {this.props.author}
       </div>
     );
   }
@@ -50,6 +72,7 @@ class NewQuote extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
       <button className='' id='new-quote'>
@@ -77,29 +100,11 @@ class TweetQuote extends Component {
           rel='noopener noreferrer'
           id='tweet-quote'
         >
-          tweet
+          <Icon icon='fa-brands:twitter-square' color='#1DA1F2' /> tweet
         </a>
       </p>
     );
   }
 }
 
-const Quotes = {
-  quotes: [
-    {
-      quote:
-        'Life isn’t about getting and having, it’s about giving and being.',
-      author: 'Kevin Kruse',
-    },
-    {
-      quote:
-        'Whatever the mind of man can conceive and believe, it can achieve.',
-      author: 'Napoleon Hill',
-    },
-    {
-      quote: 'Strive not to be a success, but rather to be of value.',
-      author: 'Albert Einstein',
-    },
-  ],
-};
 export default App;
