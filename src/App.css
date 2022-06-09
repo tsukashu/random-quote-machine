@@ -1,15 +1,32 @@
-#root{
-  border: 1px solid yellow;
+#root {
+  /* border: 1px solid yellow; */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh; /* => body heigh = 100vh is easy to non-scrool SPA*/
 }
 
-#quote-box{
-  border: 1px solid red;
+#quote-box {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  width: 60vw; /* over 95vw, test will fail */
 
+}
 
-width: 60vw;  /* over 95vw, test will fail */
+h2,
+p {
+  font-style: oblique;
+}
+.contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 40vh;
+  border: 0.5rem double #555;
+  padding: 1rem;
+}
 
+#new-quote{
+  padding: 1rem;
 }
