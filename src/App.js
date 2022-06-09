@@ -7,6 +7,9 @@ import React, { Component } from 'react';
 import { Icon } from '@iconify/react';
 import './App.css';
 import Quotes from './quotes.json';
+//MUI
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 const GetRandomQuote = () => {
   const quotes = Quotes.quotes;
@@ -23,14 +26,16 @@ const Tweet = (props) => {
   const hashtags = ['quote', 'freeCodeCamp'];
 
   return (
-    <a
-      href={`${twitterUrl}?text=${text}&hashtags=${hashtags}`}
-      target='_blank'
-      rel='noopener noreferrer'
-      id='tweet-quote'
-    >
-      <Icon icon='fa-brands:twitter-square' color='#1DA1F2' /> TWEET
-    </a>
+    <p>
+      <a
+        href={`${twitterUrl}?text=${text}&hashtags=${hashtags}`}
+        target='_blank'
+        rel='noopener noreferrer'
+        id='tweet-quote'
+      >
+        <Icon icon='fa6-brands:twitter-square' width='1.8rem' />
+      </a>
+    </p>
   );
 };
 
@@ -49,12 +54,16 @@ class App extends Component {
   render() {
     return (
       <div id='quote-box'>
-        <h2 id='text'>{this.state.quote}</h2>
-        <h2 id='author'>{this.state.author}</h2>
-        <Tweet text={this.state.quote} />
-        <button id='new-quote' onClick={this.handleClick}>
-          CHANGE QUOTE
-        </button>
+        <div className='contents'>
+          <h2 id='text'>{this.state.quote}</h2>
+          <p id='author'>{this.state.author}</p>
+        </div>
+        <div className='buttons'>
+          <Tweet text={this.state.quote} />
+          <Button variant='contained' id='new-quote' onClick={this.handleClick}>
+            CHANGE QUOTE
+          </Button>
+        </div>
       </div>
     );
   }
