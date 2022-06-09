@@ -7,107 +7,54 @@ import React, { Component } from 'react';
 import { Icon } from '@iconify/react';
 import './App.css';
 import Quotes from './quotes.json';
+
 const quotes = Quotes.quotes;
+const index = Math.floor(Math.random() * quotes.length);
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quote: '',
-      author: '',
+      quote: quotes[index].quote,
+      author: quotes[index].author,
     };
-
-    // this.ConsoleTest = this.ConsoleTest.bind(this);
   }
 
-  componentDidMount() {
-    this.SetRandomeQuotes();
-  }
-
-  SetRandomeQuotes() {
-    console.log('test');
-    let index = Math.floor(Math.random() * quotes.length);
-    this.setState({ quote: quotes[index].quote });
-    this.setState({ author: quotes[index].author });
-  }
-
-  ConsoleTest() {
-    console.log('testdayo');
-  }
-
-  render() {
-    return (
-      <div className='' id='quote-box'>
-        <Text quote={this.state.quote} />
-        <Author author={this.state.author} />
-        <NewQuote onClick={this.SetRandomeQuotes} />
-        <TweetQuote quotes={quotes} />
-      </div>
-    );
-  }
-}
-
-class Text extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className='' id='text'>
-        {this.props.quote}
-      </div>
-    );
-  }
-}
-
-class Author extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className='' id='author'>
-        {this.props.author}
-      </div>
-    );
-  }
-}
-
-class NewQuote extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <button className='' id='new-quote' onClick={this.props.onClick}>
-        new-quote
-      </button>
-    );
-  }
-}
-
-class TweetQuote extends Component {
-  constructor(props) {
-    super(props);
-  }
+  GetRandomQuote = () => {
+    // console.log('this is:', this);
+    const index = Math.floor(Math.random() * quotes.length);
+    this.setState((state) => ({
+      quote: quotes[index].quote,
+      author: quotes[index].author,
+    }));
+  };
 
   render() {
     const twitterUrl = 'http://twitter.com/intent/tweet';
     const hashtags = ['quote', 'freeCodeCamp'];
-    const text = this.props.quotes[0].quote;
 
     return (
-      <p>
-        <a
-          href={`${twitterUrl}?text=${text}&hashtags=${hashtags}`}
-          target='_blank'
-          rel='noopener noreferrer'
-          id='tweet-quote'
-        >
-          <Icon icon='fa-brands:twitter-square' color='#1DA1F2' /> tweet
-        </a>
-      </p>
+      <div id='quote-box'>
+        <div className='quote'>
+          <div id='text'>{this.state.quote}</div>
+          <div id='author'>{this.state.author}</div>
+        </div>
+        <div className='btn'>
+          <p>
+            <a
+              href={`${twitterUrl}?text=${this.state.quote}&hashtags=${hashtags}`}
+              target='_blank'
+              rel='noopener noreferrer'
+              id='tweet-quote'
+            >
+              <Icon icon='fa-brands:twitter-square' color='#1DA1F2' /> tweet
+            </a>
+          </p>
+          <button id='new-quote' onClick={this.GetRandomQuote}>
+            new-quote
+          </button>
+        </div>
+      </div>
     );
   }
 }
