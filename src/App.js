@@ -9,9 +9,18 @@ import './App.css';
 import Quotes from './quotes.json';
 //MUI
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+
+
 
 const GetRandomQuote = () => {
+  const quotes = Quotes.quotes;
+  const index = Math.floor(Math.random() * quotes.length);
+  return {
+    quote: quotes[index].quote,
+    author: quotes[index].author,
+  };
+};
+const SetInitialQuote = () => {
   const quotes = Quotes.quotes;
   const index = Math.floor(Math.random() * quotes.length);
   return {
@@ -43,7 +52,7 @@ class App extends Component {
   // constructor(props) { //maybe nouse constructor??
   //   super(props);
   // }
-  state = GetRandomQuote();
+  state = SetInitialQuote();
 
   handleClick = () => {
     // renew state with function.
