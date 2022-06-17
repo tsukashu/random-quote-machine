@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* => body heigh = 100vh is easy to non-scrool SPA*/
+  height: 100vh; /* => body heigh = 100vh is easy to non-scroll SPA*/
 }
 
 #quote-box {
