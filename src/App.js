@@ -1,15 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-useless-constructor */
-// TODO テスト用のjsonをとりま直書きでいいので用意する。
 
 import React, { Component } from 'react';
 import { Icon } from '@iconify/react';
 import './App.css';
 import Quotes from './quotes.json';
-//MUI
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 
 const GetRandomQuote = () => {
   const quotes = Quotes.quotes;
@@ -21,9 +18,11 @@ const GetRandomQuote = () => {
 };
 
 const Tweet = (props) => {
-  const text = props.text;
   const twitterUrl = 'http://twitter.com/intent/tweet';
+  const text = props.text;
   const hashtags = ['quote', 'freeCodeCamp'];
+  const twitterIcon = 'fa6-brands:twitter-square';
+  const twitterIconWidth = '1.8rem';
 
   return (
     <p>
@@ -33,17 +32,17 @@ const Tweet = (props) => {
         rel='noopener noreferrer'
         id='tweet-quote'
       >
-        <Icon icon='fa6-brands:twitter-square' width='1.8rem' />
+        <Icon icon={twitterIcon} width={twitterIconWidth} />
       </a>
     </p>
   );
 };
 
 class App extends Component {
-  // constructor(props) { //maybe nouse constructor??
-  //   super(props);
-  // }
-  state = GetRandomQuote();
+  constructor(props) { 
+    super(props);
+    this.state = GetRandomQuote();
+  }
 
   handleClick = () => {
     // renew state with function.
