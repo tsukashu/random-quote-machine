@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-useless-constructor */
@@ -8,13 +9,13 @@ import './App.css';
 import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
 
-const GetRandomQuote = () => {
-  const quotes = Quotes.quotes;
-  const index = Math.floor(Math.random() * quotes.length);
-  return {
-    quote: quotes[index].quote,
-    author: quotes[index].author,
-  };
+const GetQuoteData = () => {
+  return Quotes.quotes;
+};
+
+const SetRandomIndex = (arr) => {
+  const index = Math.floor(Math.random() * arr.length);
+  return index;
 };
 
 const Tweet = (props) => {
@@ -39,24 +40,45 @@ const Tweet = (props) => {
 };
 
 class App extends Component {
-  constructor(props) { 
+  constructor(props) {
     super(props);
-    this.state = GetRandomQuote();
+    this.state = {
+      quoteData: GetQuoteData(),
+      index: SetRandomIndex(Quotes.quotes),
+    };
   }
+  componentDidMount() {}
 
   handleClick = () => {
     // renew state with function.
     // console.log('this is ;', this); //for debug on "this"
-    this.setState((state) => GetRandomQuote());
+    this.setState({ index: SetRandomIndex(Quotes.quotes) });
   };
 
   render() {
     return (
       <div id='quote-box'>
         <div className='contents'>
-          <h2 id='text'>{this.state.quote}</h2>
-          <p id='author'>{this.state.author}</p>
+          <h2 id='text'>{this.state.quoteData[this.state.index].quote}</h2>
+          <p id='author'>{this.state.quoteData[this.state.index].author}</p>
         </div>
+        {/* TODO debug random index return right pair (quote and author  ) */}
+
+        {/*        <div>
+          <h2>test</h2>
+          <p>
+            quoteData.index <span>{this.state.index}</span>
+          </p>
+          <p>
+            quoteData[this.state.index].quote
+            <span>{this.state.quoteData[this.state.index].quote}</span>
+          </p>
+          <p>
+            quoteData[this.state.index].author
+            <span>{this.state.quoteData[this.state.index].author}</span>
+          </p>
+        </div>
+ */}
         <div className='buttons'>
           <Tweet text={this.state.quote} />
           <Button variant='contained' id='new-quote' onClick={this.handleClick}>
