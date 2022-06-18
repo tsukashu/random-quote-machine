@@ -8,6 +8,14 @@ import './App.css';
 import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
 
+const SetRandomQuote = () => {
+  const quotes = Quotes.quotes;
+  const index = Math.floor(Math.random() * quotes.length);
+  return {
+    quote: quotes[index].quote,
+    author: quotes[index].author,
+  };
+};
 const GetRandomQuote = () => {
   const quotes = Quotes.quotes;
   const index = Math.floor(Math.random() * quotes.length);
@@ -39,9 +47,9 @@ const Tweet = (props) => {
 };
 
 class App extends Component {
-  constructor(props) { 
+  constructor(props) {
     super(props);
-    this.state = GetRandomQuote();
+    this.state = SetRandomQuote();
   }
 
   handleClick = () => {
