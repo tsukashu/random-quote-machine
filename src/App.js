@@ -9,8 +9,6 @@ import './App.css';
 import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
 
-
-
 const GetQuoteData = () => {
   return Quotes.quotes;
 };
@@ -18,21 +16,6 @@ const GetQuoteData = () => {
 const SetRandomIndex = (arr) => {
   const index = Math.floor(Math.random() * arr.length);
   return index;
-};
-
-const SetRandomQuote = () => {
-  const quotes = Quotes.quotes;
-  const index = Math.floor(Math.random() * quotes.length);
-  return quotes[index];
-};
-
-const GetRandomQuote = () => {
-  const quotes = Quotes.quotes;
-  const index = Math.floor(Math.random() * quotes.length);
-  return {
-    quote: quotes[index].quote,
-    author: quotes[index].author,
-  };
 };
 
 const Tweet = (props) => {
@@ -60,9 +43,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: 'OK',
-      quote: SetRandomQuote().quote,
-      author: SetRandomQuote().author,
       quoteData: GetQuoteData(),
       index: SetRandomIndex(Quotes.quotes),
     };
@@ -72,33 +52,33 @@ class App extends Component {
   handleClick = () => {
     // renew state with function.
     // console.log('this is ;', this); //for debug on "this"
-    this.setState((state) => GetRandomQuote());
+    this.setState({ index: SetRandomIndex(Quotes.quotes) });
   };
 
   render() {
     return (
       <div id='quote-box'>
         <div className='contents'>
-          <h2 id='text'>{this.state.quote}</h2>
-          <p id='author'>{this.state.author}</p>
+          <h2 id='text'>{this.state.quoteData[this.state.index].quote}</h2>
+          <p id='author'>{this.state.quoteData[this.state.index].author}</p>
         </div>
-        <div>
+        {/* TODO debug random index return right pair (quote and author  ) */}
+
+        {/*        <div>
           <h2>test</h2>
-          <p>quoteData.index{this.state.index}</p>
+          <p>
+            quoteData.index <span>{this.state.index}</span>
+          </p>
           <p>
             quoteData[this.state.index].quote
-            {this.state.quoteData[this.state.index].quote}
+            <span>{this.state.quoteData[this.state.index].quote}</span>
           </p>
           <p>
-            quoteData[Math...].quote
-            {
-              this.state.quoteData[
-                Math.floor(Math.random() * this.state.quoteData.length)
-              ].quote
-            }
+            quoteData[this.state.index].author
+            <span>{this.state.quoteData[this.state.index].author}</span>
           </p>
         </div>
-
+ */}
         <div className='buttons'>
           <Tweet text={this.state.quote} />
           <Button variant='contained' id='new-quote' onClick={this.handleClick}>
