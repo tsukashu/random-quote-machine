@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-useless-constructor */
@@ -11,11 +12,9 @@ import Button from '@mui/material/Button';
 const SetRandomQuote = () => {
   const quotes = Quotes.quotes;
   const index = Math.floor(Math.random() * quotes.length);
-  return {
-    quote: quotes[index].quote,
-    author: quotes[index].author,
-  };
+  return quotes[index];
 };
+
 const GetRandomQuote = () => {
   const quotes = Quotes.quotes;
   const index = Math.floor(Math.random() * quotes.length);
@@ -49,7 +48,11 @@ const Tweet = (props) => {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = SetRandomQuote();
+    this.state = {
+      test: 'OK',
+      quote: SetRandomQuote().quote,
+      author: SetRandomQuote().author,
+    };
   }
 
   handleClick = () => {
