@@ -9,6 +9,17 @@ import './App.css';
 import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
 
+
+
+const GetQuoteData = () => {
+  return Quotes.quotes;
+};
+
+const SetRandomIndex = (arr) => {
+  const index = Math.floor(Math.random() * arr.length);
+  return index;
+};
+
 const SetRandomQuote = () => {
   const quotes = Quotes.quotes;
   const index = Math.floor(Math.random() * quotes.length);
@@ -52,8 +63,11 @@ class App extends Component {
       test: 'OK',
       quote: SetRandomQuote().quote,
       author: SetRandomQuote().author,
+      quoteData: GetQuoteData(),
+      index: SetRandomIndex(Quotes.quotes),
     };
   }
+  componentDidMount() {}
 
   handleClick = () => {
     // renew state with function.
@@ -68,6 +82,23 @@ class App extends Component {
           <h2 id='text'>{this.state.quote}</h2>
           <p id='author'>{this.state.author}</p>
         </div>
+        <div>
+          <h2>test</h2>
+          <p>quoteData.index{this.state.index}</p>
+          <p>
+            quoteData[this.state.index].quote
+            {this.state.quoteData[this.state.index].quote}
+          </p>
+          <p>
+            quoteData[Math...].quote
+            {
+              this.state.quoteData[
+                Math.floor(Math.random() * this.state.quoteData.length)
+              ].quote
+            }
+          </p>
+        </div>
+
         <div className='buttons'>
           <Tweet text={this.state.quote} />
           <Button variant='contained' id='new-quote' onClick={this.handleClick}>
