@@ -39,15 +39,18 @@ class App extends Component {
   };
 
   render() {
+    const quote = this.state.quoteData[this.state.index].quote;
+
+    const author = this.state.quoteData[this.state.index].author;
     return (
       <div id='quote-box'>
         <div className='contents'>
-          <h2 id='text'>{this.state.quoteData[this.state.index].quote}</h2>
-          <p id='author'>{this.state.quoteData[this.state.index].author}</p>
+          <h2 id='text'>{quote}</h2>
+          <p id='author'>{author}</p>
         </div>
-        
+
         <div className='buttons'>
-          <Tweet text={this.state.quoteData[this.state.index].quote} />
+          <Tweet text={quote} />
           <Button variant='contained' id='new-quote' onClick={this.handleClick}>
             CHANGE QUOTE
           </Button>
