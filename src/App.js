@@ -5,14 +5,11 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 
 // child components
 import Tweet from './TweetButton';
-
-
 
 const SetRandomIndex = (arr) => {
   const index = Math.floor(Math.random() * arr.length);
@@ -25,36 +22,38 @@ class App extends Component {
     this.state = {
       isLoaded: false,
       username: '',
+      quoteData: [],
+      index: 0,
     };
   }
   componentDidMount() {
     const gistUrl =
-      'https://gist.githubusercontent.com/tsukashu/f016b002ff55a7ec3428d3dada1f5e2f/raw/529de5120a04270c42533b859993b2692b718a42/quotes-test.json';
+      'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json';
 
     axios
       .get(gistUrl)
       .then((res) => res.data)
       .then((data) => {
-        this.setState({
-          // quoteData: Quotes.quotes,
-          axiosData: data.quotes,
-          // index: SetRandomIndex(Quotes.quotes),
-          index: SetRandomIndex(data.quotes),
+        const index = this.setState({
+          quoteData: data.quotes,
+          index: Math.floor(Math.random() * data.quotes.length),
           isLoaded: true,
         });
       });
   }
 
   handleClick = () => {
-    this.setState({ index: SetRandomIndex(this.state.axiosData) });
+    this.setState((state) => {
+      return { index: Math.floor(Math.random() * state.quoteData.length) };
+    });
   };
 
   render() {
     if (this.state.isLoaded !== true) {
       return <div>Now Loading...</div>;
     } else {
-      const quote = this.state.axiosData[this.state.index].quote;
-      const author = this.state.axiosData[this.state.index].author;
+      const quote = this.state.quoteData[this.state.index].quote;
+      const author = this.state.quoteData[this.state.index].author;
       return (
         <div id='quote-box'>
           <div className='contents'>
