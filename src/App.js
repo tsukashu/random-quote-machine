@@ -4,29 +4,22 @@
 /* eslint-disable no-useless-constructor */
 
 import React, { Component } from 'react';
-import { Icon } from '@iconify/react';
 import './App.css';
 import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
 // child components
 import Tweet from './TweetButton';
 
-const GetQuoteData = () => {
-  return Quotes.quotes;
-};
-
 const SetRandomIndex = (arr) => {
   const index = Math.floor(Math.random() * arr.length);
   return index;
 };
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quoteData: GetQuoteData(),
+      quoteData: Quotes.quotes,
       index: SetRandomIndex(Quotes.quotes),
     };
   }
