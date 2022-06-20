@@ -7,9 +7,25 @@ import React, { Component } from 'react';
 import './App.css';
 import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+
 // child components
 import Tweet from './TweetButton';
-import TestAxios from './TestAxios';
+
+const TestAxios = () => {
+  const baseURL = 'https://jsonplaceholder.typicode.com/posts/1';
+  axios
+    .get(baseURL)
+    .then((res) => {
+      console.log(res.status);
+      console.log(res.data);
+      return res.data;
+    })
+    .then((data) => {
+      const dataType = Object.prototype.toString.call(data);
+      console.log(dataType);
+    });
+};
 
 const SetRandomIndex = (arr) => {
   const index = Math.floor(Math.random() * arr.length);
