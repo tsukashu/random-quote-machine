@@ -12,20 +12,7 @@ import axios from 'axios';
 // child components
 import Tweet from './TweetButton';
 
-const TestAxios = () => {
-  const baseURL = 'https://jsonplaceholder.typicode.com/posts/1';
-  axios
-    .get(baseURL)
-    .then((res) => {
-      console.log(res.status);
-      console.log(res.data);
-      return res.data;
-    })
-    .then((data) => {
-      const dataType = Object.prototype.toString.call(data);
-      console.log(dataType);
-    });
-};
+
 
 const SetRandomIndex = (arr) => {
   const index = Math.floor(Math.random() * arr.length);
@@ -37,38 +24,42 @@ class App extends Component {
     super(props);
     this.state = {
       isLoaded: false,
+      username: '',
     };
   }
   componentDidMount() {
-    this.setState({
-      quoteData: Quotes.quotes,
-      index: SetRandomIndex(Quotes.quotes),
-      isLoaded: true,
-    });
+    const gistUrl =
+      'https://gist.githubusercontent.com/tsukashu/f016b002ff55a7ec3428d3dada1f5e2f/raw/529de5120a04270c42533b859993b2692b718a42/quotes-test.json';
+
+    axios
+      .get(gistUrl)
+      .then((res) => res.data)
+      .then((data) => {
+        this.setState({
+          // quoteData: Quotes.quotes,
+          axiosData: data.quotes,
+          // index: SetRandomIndex(Quotes.quotes),
+          index: SetRandomIndex(data.quotes),
+          isLoaded: true,
+        });
+      });
   }
 
   handleClick = () => {
-    // renew state with function.
-    // console.log('this is ;', this); //for debug on "this"
-    this.setState({ index: SetRandomIndex(Quotes.quotes) });
+    this.setState({ index: SetRandomIndex(this.state.axiosData) });
   };
 
   render() {
     if (this.state.isLoaded !== true) {
       return <div>Now Loading...</div>;
     } else {
-      const quote = this.state.quoteData[this.state.index].quote;
-      const author = this.state.quoteData[this.state.index].author;
+      const quote = this.state.axiosData[this.state.index].quote;
+      const author = this.state.axiosData[this.state.index].author;
       return (
         <div id='quote-box'>
           <div className='contents'>
             <h2 id='text'>{quote}</h2>
             <p id='author'>{author}</p>
-          </div>
-          <div className='AxiosTest'>
-            AxiosTest
-            <h3>pls push button to run axios.get</h3>
-            <button onClick={() => TestAxios()}>TestAxios</button>
           </div>
 
           <div className='buttons'>
