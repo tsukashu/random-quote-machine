@@ -8,6 +8,8 @@ import { Icon } from '@iconify/react';
 import './App.css';
 import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
+// child components
+import Tweet from './TweetButton';
 
 const GetQuoteData = () => {
   return Quotes.quotes;
@@ -18,26 +20,7 @@ const SetRandomIndex = (arr) => {
   return index;
 };
 
-const Tweet = (props) => {
-  const twitterUrl = 'http://twitter.com/intent/tweet';
-  const text = props.text;
-  const hashtags = ['quote', 'freeCodeCamp'];
-  const twitterIcon = 'fa6-brands:twitter-square';
-  const twitterIconWidth = '1.8rem';
 
-  return (
-    <p>
-      <a
-        href={`${twitterUrl}?text=${text}&hashtags=${hashtags}`}
-        target='_blank'
-        rel='noopener noreferrer'
-        id='tweet-quote'
-      >
-        <Icon icon={twitterIcon} width={twitterIconWidth} />
-      </a>
-    </p>
-  );
-};
 
 class App extends Component {
   constructor(props) {
@@ -62,25 +45,9 @@ class App extends Component {
           <h2 id='text'>{this.state.quoteData[this.state.index].quote}</h2>
           <p id='author'>{this.state.quoteData[this.state.index].author}</p>
         </div>
-        {/* TODO debug random index return right pair (quote and author  ) */}
-
-        {/*        <div>
-          <h2>test</h2>
-          <p>
-            quoteData.index <span>{this.state.index}</span>
-          </p>
-          <p>
-            quoteData[this.state.index].quote
-            <span>{this.state.quoteData[this.state.index].quote}</span>
-          </p>
-          <p>
-            quoteData[this.state.index].author
-            <span>{this.state.quoteData[this.state.index].author}</span>
-          </p>
-        </div>
- */}
+        
         <div className='buttons'>
-          <Tweet text={this.state.quote} />
+          <Tweet text={this.state.quoteData[this.state.index].quote} />
           <Button variant='contained' id='new-quote' onClick={this.handleClick}>
             CHANGE QUOTE
           </Button>
