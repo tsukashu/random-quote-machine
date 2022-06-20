@@ -9,6 +9,7 @@ import Quotes from './quotes.json';
 import Button from '@mui/material/Button';
 // child components
 import Tweet from './TweetButton';
+import TestAxios from './TestAxios';
 
 const SetRandomIndex = (arr) => {
   const index = Math.floor(Math.random() * arr.length);
@@ -40,6 +41,11 @@ class App extends Component {
         <div className='contents'>
           <h2 id='text'>{quote}</h2>
           <p id='author'>{author}</p>
+        </div>
+        <div className='AxiosTest'>
+          AxiosTest
+          <h3>pls push button to run axios.get</h3>
+          <button onClick={() => TestAxios()}>TestAxios</button>
         </div>
 
         <div className='buttons'>
