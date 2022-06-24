@@ -5,7 +5,7 @@ const Tweet = (props) => {
   const text = props.text;
   const hashtags = ['quote', 'freeCodeCamp'];
   const twitterIcon = 'fa6-brands:twitter-square';
-  const twitterIconWidth = '1.8rem';
+  const twitterIconWidth = '2rem';
 
   return (
     <p>
