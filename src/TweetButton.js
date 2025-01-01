@@ -4,8 +4,9 @@ const Tweet = (props) => {
   const twitterUrl = 'http://twitter.com/intent/tweet';
   const text = props.text;
   const hashtags = ['quote', 'freeCodeCamp'];
-  const twitterIcon = 'fa6-brands:twitter-square';
-  const twitterIconWidth = '1.8rem';
+  // const twitterIcon = 'fa6-brands:twitter-square';
+  const twitterIcon = 'fa6-brands:x-twitter'; 
+  const twitterIconWidth = '2.0em';
 
   return (
     <p>
